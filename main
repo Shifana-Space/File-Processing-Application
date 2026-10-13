@@ -1,0 +1,42 @@
+import java.io.*;
+
+public class EmployeeFile {
+
+    public static void main(String[] args) {
+
+        String file = "employee.txt";
+
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            String data = "Employee ID: 101\nName: Shifana\nSalary: 30000";
+            fos.write(data.getBytes());
+            fos.close();
+
+            System.out.println("Employee details stored successfully.");
+
+            FileInputStream fis = new FileInputStream(file);
+            int ch;
+
+            System.out.println("\nReading using Byte Stream:");
+            while ((ch = fis.read()) != -1) {
+                System.out.print((char) ch);
+            }
+            fis.close();
+
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+
+            System.out.println("\n\nReading using Character Stream:");
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            br.close();
+
+        } catch (IOException e) {
+            System.out.println("I/O Error: " + e.getMessage());
+        }
+    }
+}
